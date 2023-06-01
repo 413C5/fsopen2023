@@ -29,11 +29,14 @@ const App = () => {
 
     const StatisticLine = (props) => {
         return (
-            <div>
-                <p>
-                    {props.text} {props.value} {props.extra}
-                </p>
-            </div>
+            <tr>
+                <td>
+                    {props.text}
+                </td>
+                <td>
+                    {props.value} {props.extra}
+                </td>
+            </tr>
         )
     }
 
@@ -45,15 +48,20 @@ const App = () => {
                 </div>
             )
         }
+
         else {
             return (
                 <div>
-                    <StatisticLine text={'good'} value={props.good} extra={''} />
-                    <StatisticLine text={'neutral'} value={props.neutral} extra={''} />
-                    <StatisticLine text={'bad'} value={props.bad} extra={''} />
-                    <StatisticLine text={'all'} value={props.good + props.neutral + props.bad} extra={''} />
-                    <StatisticLine text={'average'} value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} extra={''} />
-                    <StatisticLine text={'positive'} value={(props.good / (props.good + props.neutral + props.bad)) * 100} extra={'%'} />
+                    <table>
+                        <tbody>
+                            <StatisticLine text={'good'} value={props.good} extra={''} />
+                            <StatisticLine text={'neutral'} value={props.neutral} extra={''} />
+                            <StatisticLine text={'bad'} value={props.bad} extra={''} />
+                            <StatisticLine text={'all'} value={props.good + props.neutral + props.bad} extra={''} />
+                            <StatisticLine text={'average'} value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} extra={''} />
+                            <StatisticLine text={'positive'} value={(props.good / (props.good + props.neutral + props.bad)) * 100} extra={'%'} />
+                        </tbody>
+                    </table>
                 </div>
             )
         }
