@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import Statistics from "./Statistics"
 
 const App = () => {
     // save clicks of each button to its own state
@@ -25,46 +26,6 @@ const App = () => {
         return (
             <button onClick={props.handle}>{props.text}</button>
         )
-    }
-
-    const StatisticLine = (props) => {
-        return (
-            <tr>
-                <td>
-                    {props.text}
-                </td>
-                <td>
-                    {props.value} {props.extra}
-                </td>
-            </tr>
-        )
-    }
-
-    const Statistics = (props) => {
-        if (good + neutral + bad === 0) {
-            return (
-                <div>
-                    No feedback given
-                </div>
-            )
-        }
-
-        else {
-            return (
-                <div>
-                    <table>
-                        <tbody>
-                            <StatisticLine text={'good'} value={props.good} extra={''} />
-                            <StatisticLine text={'neutral'} value={props.neutral} extra={''} />
-                            <StatisticLine text={'bad'} value={props.bad} extra={''} />
-                            <StatisticLine text={'all'} value={props.good + props.neutral + props.bad} extra={''} />
-                            <StatisticLine text={'average'} value={(props.good - props.bad) / (props.good + props.neutral + props.bad)} extra={''} />
-                            <StatisticLine text={'positive'} value={(props.good / (props.good + props.neutral + props.bad)) * 100} extra={'%'} />
-                        </tbody>
-                    </table>
-                </div>
-            )
-        }
     }
 
     return (
