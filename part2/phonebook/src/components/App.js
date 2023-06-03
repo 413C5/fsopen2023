@@ -3,17 +3,31 @@ import PersonForm from "./PersonForm";
 import Persons from "./Persons";
 import Filter from "./Filter";
 import personsService from "../services/persons";
+import Notification from "./Notification"
 
 const App = () => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [filter, setFilter] = useState('')
+    const [state, setState] = useState(false)
+    const [message, setMessage] = useState(null)
 
     //Cleans inputs
     const resetFields = () => {
         setNewName('')
         setNewNumber('')
+    }
+
+    //Sets message and color
+    const showMessage = (message, state) => {
+        setMessage(message)
+        console.log(message)
+        setState(state)
+        setTimeout(() => {
+            setMessage(null)
+            setState(false)
+        }, 5000)
     }
 
     //Recover data,
@@ -38,10 +52,9 @@ const App = () => {
         //finds if person exist in array
         if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
             if (window.confirm(`${newName} is already added to phonebook,replace the old number with a new one?`)) {
-                console.log('changed number')
 
-                console.log(person)
-                console.log(person2)
+                //console.log(person)
+                //console.log(person2)
 
                 personsService
                     .update(person.id, person2)
@@ -56,9 +69,7 @@ const App = () => {
                                     return x
                             })
                         )
-
-                        console.log('updated number')
-                        //console.log('response',response)
+                        showMessage(`Updated ${newName} with number ${newNumber}`, true)
                         resetFields()
                     })
             }
@@ -79,8 +90,8 @@ const App = () => {
                 .create(newPerson)
                 .then(response => {
                     setPersons(persons2.concat(response))
+                    showMessage(`Added ${newName}`, true)
                     resetFields()
-                    //console.log('response',response)
                 })
         }
     }
@@ -127,6 +138,7 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
+            <Notification message={message} state={state} />
             <Filter filter={filter} handleFilterChange={handleFilterChange} />
             <h3>Add a new</h3>
             <PersonForm
