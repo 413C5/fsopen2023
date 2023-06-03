@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import PersonForm from "./PersonForm";
 import Persons from "./Persons";
 import Filter from "./Filter";
+import personsService from "../services/persons";
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -18,14 +18,12 @@ const App = () => {
 
     //Recover data
     useEffect(() => {
-        axios
-          .get('http://localhost:3001/persons')
-          .then(response => {
-            console.log('entered effect')
-            setPersons(response.data)
-          })
-      }, [])
-    
+        personsService
+            .getAll()
+            .then(response => {
+                setPersons(response)
+            })
+    }, [])
 
     //handleAddPerson
     const addPerson = (event) => {
@@ -46,9 +44,12 @@ const App = () => {
             }
 
             //adding new person
-
-            setPersons(persons2.concat(newPerson))
-            resetFields()
+            personsService
+                .create(newPerson)
+                .then(response => {
+                    setPersons(persons2.concat(response))
+                    resetFields()
+                })
         }
     }
 
