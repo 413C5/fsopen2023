@@ -16,7 +16,7 @@ const App = () => {
         setNewNumber('')
     }
 
-    //Recover data
+    //Recover data,
     useEffect(() => {
         personsService
             .getAll()
