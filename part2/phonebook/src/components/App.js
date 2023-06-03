@@ -4,9 +4,19 @@ import Persons from "./Persons";
 
 const App = () => {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas' }
+        {
+            name: 'Arto Hellas',
+            number: '040-123456'
+        }
     ])
     const [newName, setNewName] = useState('')
+    const [newNumber, setNewNumber] = useState('')
+
+    //Cleans inputs
+    const resetFields = () => {
+        setNewName('')
+        setNewNumber('')
+    }
 
     //handleAddPerson
     const addPerson = (event) => {
@@ -15,7 +25,7 @@ const App = () => {
         //finds if person exist in array
         if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase()))
             alert(`${newName} is already added to phonebook`)
-        
+
         //Successfully added person
         else {
             const persons2 = [...persons]
@@ -23,12 +33,13 @@ const App = () => {
             //Created person object
             const newPerson = {
                 name: newName,
+                number: newNumber,
             }
 
             //adding new person
 
             setPersons(persons2.concat(newPerson))
-            setNewName('')
+            resetFields()
         }
     }
 
@@ -38,12 +49,20 @@ const App = () => {
         setNewName(event.target.value)
     }
 
+    const handleNumberChange = (event) => {
+        event.preventDefault()
+        //console.log(event.target.value)
+        setNewNumber(event.target.value)
+    }
+
     return (
         <div>
             <PersonForm
                 addPerson={addPerson}
                 newName={newName}
                 handleNameChange={handleNameChange}
+                newNumber={newNumber}
+                handleNumberChange={handleNumberChange}
             />
             <Persons persons={persons} />
         </div>
