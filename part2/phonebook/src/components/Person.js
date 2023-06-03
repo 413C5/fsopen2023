@@ -2,8 +2,8 @@ import React from "react";
 
 const Person = ({ person, handleDelete }) => {
 
-    const deletePerson=()=>{
-        return(
+    const deletePerson = () => {
+        return (
             handleDelete(person.id)
         )
     }

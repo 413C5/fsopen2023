@@ -29,9 +29,40 @@ const App = () => {
     const addPerson = (event) => {
         event.preventDefault()
 
+        //Get id of specific object
+        const person = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+
+        //updatedObject
+        const person2 = { ...person, number: newNumber }
+
         //finds if person exist in array
-        if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase()))
-            alert(`${newName} is already added to phonebook`)
+        if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
+            if (window.confirm(`${newName} is already added to phonebook,replace the old number with a new one?`)) {
+                console.log('changed number')
+
+                console.log(person)
+                console.log(person2)
+
+                personsService
+                    .update(person.id, person2)
+                    .then(response => {
+
+                        //object of array is updated if id is found
+                        setPersons(
+                            persons.map(x => {
+                                if (x.id === person.id)
+                                    return response
+                                else
+                                    return x
+                            })
+                        )
+
+                        console.log('updated number')
+                        //console.log('response',response)
+                        resetFields()
+                    })
+            }
+        }
 
         //Successfully added person
         else {
@@ -49,6 +80,7 @@ const App = () => {
                 .then(response => {
                     setPersons(persons2.concat(response))
                     resetFields()
+                    //console.log('response',response)
                 })
         }
     }
@@ -74,15 +106,16 @@ const App = () => {
     const handleDelete = (id) => {
         const findPerson = persons.find(person => person.id === id)
         const persons2 = persons.filter(person => person.id !== id)
-        console.log(persons2)
+        //console.log(persons2)
 
         if (window.confirm(`Delete ${findPerson.name}`)) {
-            console.log('delete of ', id)
+            //console.log('delete of ', id)
 
             personsService
                 .remove(id)
                 .then(response => {
                     setPersons(persons2)
+                    //console.log(response)
 
                 })
         }
