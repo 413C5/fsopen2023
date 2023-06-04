@@ -30,13 +30,17 @@ const App = () => {
         }, 5000)
     }
 
-    //Recover data,
+    //Recover data from db.json
     useEffect(() => {
         personsService
             .getAll()
             .then(response => {
                 setPersons(response)
             })
+            .catch(error => {
+                showMessage(`Something went wrong: ${error}`, false)
+            })
+
     }, [])
 
     //handleAddPerson
@@ -49,6 +53,7 @@ const App = () => {
         //updatedObject
         const person2 = { ...person, number: newNumber }
 
+        //Updating person number if existing
         //finds if person exist in array
         if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
             if (window.confirm(`${newName} is already added to phonebook,replace the old number with a new one?`)) {
@@ -60,7 +65,7 @@ const App = () => {
                     .update(person.id, person2)
                     .then(response => {
 
-                        //object of array is updated if id is found
+                        //Object of array is updated if id is found
                         setPersons(
                             persons.map(x => {
                                 if (x.id === person.id)
@@ -69,13 +74,17 @@ const App = () => {
                                     return x
                             })
                         )
-                        showMessage(`Updated ${newName} with number ${newNumber}`, true)
+                        showMessage(`Updated ${person.name} with number ${newNumber}`, true)
                         resetFields()
+                    })
+                    .catch(error => {
+                        showMessage(`Error updating ${person.name}. That contact was recently deleted`, false)
+                        setPersons(persons.filter(x => x.id !== person.id))
                     })
             }
         }
 
-        //Successfully added person
+        //Adding person
         else {
             const persons2 = [...persons]
 
@@ -85,13 +94,16 @@ const App = () => {
                 number: newNumber,
             }
 
-            //adding new person
+            //Adding new person
             personsService
                 .create(newPerson)
                 .then(response => {
                     setPersons(persons2.concat(response))
                     showMessage(`Added ${newName}`, true)
                     resetFields()
+                })
+                .catch(error => {
+                    showMessage(`Error adding contact`, false)
                 })
         }
     }
@@ -126,8 +138,12 @@ const App = () => {
                 .remove(id)
                 .then(response => {
                     setPersons(persons2)
-                    //console.log(response)
+                    showMessage(`Deleted ${findPerson.name}`, true)
 
+                })
+                .catch(error => {
+                    showMessage(`Information of ${findPerson.name} has already been removed from server`, false)
+                    setPersons(persons.filter(x => x.id !== id))
                 })
         }
 
