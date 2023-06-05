@@ -22,6 +22,12 @@ const App = () => {
         setFilter(event.target.value)
     }
 
+    const handleButtonClick = (event) => {
+        event.preventDefault()
+        //console.log(event.target.value)
+        setFilter(event.target.value)
+    }
+
     const filteredCountries = countries.filter(country => country.name.common.toLowerCase().includes(filter.toLowerCase()))
 
     //console.log('filtered countries', filteredCountries.length)
@@ -29,7 +35,7 @@ const App = () => {
     return (
         <div>
             <Filter filter={filter} handleFilterChange={handleFilterChange} />
-            <Countries countries={filteredCountries} />
+            <Countries countries={filteredCountries} handleButtonClick={handleButtonClick} />
         </div>
     )
 }

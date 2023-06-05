@@ -1,7 +1,7 @@
 import React from "react";
 import CountryDetails from "./CountryDetails";
 
-const Countries = ({ countries }) => {
+const Countries = ({ countries, handleButtonClick }) => {
 
     //console.log('received ', countries.length)
 
@@ -20,7 +20,9 @@ const Countries = ({ countries }) => {
             <div>
                 {countries.map(country => {
                     return (
-                        <p key={country.name.common}> {country.name.common}</p>
+                        <p key={country.name.common}>
+                            {country.name.common} <button value={country.name.common} onClick={handleButtonClick}>show</button>
+                        </p>
                     )
                 })}
             </div>
