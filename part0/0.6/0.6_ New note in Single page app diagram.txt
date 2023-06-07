@@ -1,0 +1,29 @@
+title 0.6: New note in Single page app diagram
+
+note over browser:
+Upon clicking the button on the form, the browser sends the user input to the server.
+The Content-Type header in the request informs the server that the enclosed data is
+in JSON format.
+Additionally, when the submit button is clicked, the browser executes an event handler
+that generates a new note, appends it to the list of notes, and updates the note list
+on the page. Subsequently, the browser sends the new note to the server.
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+After receiving the request, the server responds with a status code 201, indicating
+that the resource has been successfully created. Unlike before, the server does not
+request a redirect, so the browser remains on the same page without making any
+additional HTTP requests.
+The POST request to the "new_note_spa" endpoint includes the newly created note
+as JSON data.
+end note
+
+server-->browser: HTTP 201
+
+note over browser:
+As a result, the browser remains on the same page and does not reload the Notes page.
+During this process, the browser executes an event handler that is responsible for
+rendering and displaying the notes on the page.
+end note.
