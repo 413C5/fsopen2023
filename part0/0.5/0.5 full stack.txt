@@ -1,0 +1,31 @@
+title 0.5: Single page app diagram
+
+note over browser:
+The page is visited by the user
+end note.
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTTP 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: HTTP 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: HTTP 200
+
+note over browser:
+As the browser executes the spa.js file,
+it sends a request for the data.json file.
+During its execution, the browser initiates 
+the execution of JavaScript code that requests
+JSON data from the server.
+end note.
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "A new note is added", date: "2023-06-05" }, ...]
+server-->browser: HTTP 200
+
+note over browser:
+While the browser is processing, spa.js incorporates the
+requested data into the Document Object Model (DOM).
+Additionally, the browser executes an event handler responsible
+for rendering the notes to be displayed.
+end note.
