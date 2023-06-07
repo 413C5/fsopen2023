@@ -1,0 +1,48 @@
+title 0.4: New note diagram
+
+note over browser:
+When the user inputs a note into the form field
+and clicks on the "Save" button, the browser will
+send the user's input to the server.
+end note.
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+After receiving the user's input, the server responds
+with an HTTP status code 302, indicating a URL redirect.
+This instructs the browser to initiate a new HTTP GET
+request to the address specified in the header's Location field,
+which is the notes address.Subsequently, the server stores the note.
+end note.
+
+server-->browser: HTTP 302 location: /exampleapp/notes
+
+note over browser:
+Notes page is reloaded by browser
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTTP 304
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: HTTP 304
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: HTTP 304
+
+note over browser:
+The browser initiates the execution of JavaScript code,
+which includes a request for JSON data from the server.
+As part of its execution, the browser runs the main.js file,
+which specifically requests the data.json file.
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{ content: "A new note is added", date: "2023-06-05" }, ...]
+server-->browser: HTTP 200
+
+note over browser:
+Upon execution, the browser triggers the event handler
+responsible for rendering the notes to be displayed.
+As the main.js script is executed, it adds the requested
+data to the Document Object Model (DOM).
