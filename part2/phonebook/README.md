@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### What does this do?
+This project displays a phonebook, where:
+-Name/Number of a person can be added
+-People can be searched by using a filter
+-Number can be updated
+-People can be deleted
+-When doing a successfull operation , a notification is shown
+
+Axios is used in order to communicate with a backend (in port 3001), data is stored in db.json file
