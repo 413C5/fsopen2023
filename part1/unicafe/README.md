@@ -68,3 +68,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### What does this do?
+This project displays the use of event handlers and buttons in order to show a basic interface, in which the user can click a button in order to give feedback in a cafe. After clicking on the buttons , some statistics are shown , such as the number of times each button was clicked, as well as the average and positive score of the clicks.

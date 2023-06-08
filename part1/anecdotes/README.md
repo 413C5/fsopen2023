@@ -68,3 +68,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### What does this do?
+This project displays the of hooks in order to show a random anecdote. Along with the anecdote shown there is a button which when clicked, increases the score of the anecdote. The anecdote with most votes is shown below.
