@@ -64,6 +64,28 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
+app.delete('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    let size = persons.length
+
+    console.log('array:', persons)
+    console.log('length', persons.length)
+
+    //Deletion of person with id
+    persons = persons.filter(person => person.id !== id)
+
+    //Error prevention
+    //size>length means operation was successful
+    if (size > persons.length)
+        response.status(204).end()
+    else
+        response.status(404).end()
+
+    console.log('array:', persons)
+    console.log('length', persons.length)
+})
+
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
