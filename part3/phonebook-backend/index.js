@@ -1,5 +1,12 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
+app.use(morgan('tiny'))
+
+morgan.token('object', function (request, require) {
+    return `${JSON.stringify(request.body)}`
+})
+
 app.use(express.json())
 
 let persons = [
@@ -39,14 +46,14 @@ app.get('/api/persons', (request, response) => {
 
 app.get('/info', (request, response) => {
     let size = (persons.length).toString()
-    console.log(size)
+    //console.log(size)
 
     const date = new Date()
     const today = date.toDateString()
     const time = date.toTimeString()
 
-    console.log('Date:', today)
-    console.log('Time:', time)
+    //console.log('Date:', today)
+    //console.log('Time:', time)
 
     response.send(
         `Phonebook has info for ${size} people` +
@@ -58,7 +65,7 @@ app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
 
-    console.log(person)
+    //console.log(person)
 
     if (person) {
         response.json(person)
@@ -72,8 +79,8 @@ app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     let size = persons.length
 
-    console.log('array:', persons)
-    console.log('length', persons.length)
+    //console.log('array:', persons)
+    //console.log('length', persons.length)
 
     //Deletion of person with id
     persons = persons.filter(person => person.id !== id)
@@ -85,8 +92,8 @@ app.delete('/api/persons/:id', (request, response) => {
     else
         response.status(404).end()
 
-    console.log('array:', persons)
-    console.log('length', persons.length)
+    //console.log('array:', persons)
+    //console.log('length', persons.length)
 })
 
 app.post('/api/persons', (request, response) => {
@@ -94,8 +101,8 @@ app.post('/api/persons', (request, response) => {
 
     const findPerson = persons.find(x => x.name === body.name)
 
-    console.log('array:', persons)
-    console.log('length', persons.length)
+    //console.log('array:', persons)
+    //console.log('length', persons.length)
 
 
     //Name or number is missing
@@ -134,8 +141,8 @@ app.post('/api/persons', (request, response) => {
         persons = persons.concat(newPerson)
         response.json(newPerson)
 
-        console.log('array:', persons)
-        console.log('length', persons.length)
+        //console.log('array:', persons)
+        //console.log('length', persons.length)
     }
 })
 
