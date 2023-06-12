@@ -36,6 +36,11 @@ let persons = [
         "id": 4,
         "name": "Mary Poppendieck",
         "number": "39-23-6423122"
+    },
+    {
+        "id": 5,
+        "name": "a",
+        "number": "1"
     }
 ]
 
@@ -72,7 +77,7 @@ app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
 
-    //console.log(person)
+    console.log(person)
 
     if (person) {
         response.json(person)
@@ -150,6 +155,44 @@ app.post('/api/persons', (request, response) => {
 
         //console.log('array:', persons)
         //console.log('length', persons.length)
+    }
+})
+
+app.put('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const body = request.body
+
+    const findPerson = persons.find(person => person.id === id)
+
+    console.log('Find person', findPerson)
+    console.log('---------------before update')
+
+    if (findPerson!==undefined) {
+        const updatedPerson = {
+            id:id,
+            name: body.name,
+            number: body.number
+        }
+
+        persons=persons.map(x => {
+            if (x.id === id)
+                return (
+                    x = updatedPerson
+                )
+            else
+                return x
+        })
+        console.log('---------------after update')
+        console.log('id', id)
+        console.log('body', body)
+        console.log('updatedPerson', updatedPerson)
+        response.json(updatedPerson)
+        console.log('persons',persons)
+    }
+    else {
+        response.status(400).json({
+            error: 'person with id not found'
+        })
     }
 })
 

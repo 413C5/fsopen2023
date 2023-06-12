@@ -79,7 +79,7 @@ const App = () => {
                     })
                     .catch(error => {
                         showMessage(`Error updating ${person.name}. That contact was recently deleted`, false)
-                        console.log(error)
+                        //console.log(error)
                         setPersons(persons.filter(x => x.id !== person.id))
                     })
             }
