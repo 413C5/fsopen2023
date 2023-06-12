@@ -91,36 +91,52 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
-    let size = persons.length
+
+    const findPerson = persons.find(x => x.name === body.name)
 
     console.log('array:', persons)
     console.log('length', persons.length)
 
-    if (!body.name || !body.number) {
-        response.status(400).json({
+
+    //Name or number is missing
+    if (!body.name && !body.number) {
+        return response.status(400).json({
             error: 'name or number is missing'
         })
     }
 
-    const newPerson = {
-        id: generateRandomId(),
-        name: body.name,
-        number: body.number
+    else if (!body.name) {
+        return response.status(400).json({
+            error: 'name is missing'
+        })
     }
 
-    persons = persons.concat(newPerson)
-
-    //Error prevention
-
-    if (size < persons.length) {
-        response.json(newPerson)
+    else if (!body.number) {
+        return response.status(400).json({
+            error: 'number is missing'
+        })
     }
+
     else {
-        response.status(400).end()
-    }
+        //Undefined means there is no name duplicate
+        if (findPerson !== undefined) {
+            return response.status(400).json({
+                error: 'name must be unique'
+            })
+        }
 
-    console.log('array:', persons)
-    console.log('length', persons.length)
+        const newPerson = {
+            id: generateRandomId(),
+            name: body.name,
+            number: body.number
+        }
+
+        persons = persons.concat(newPerson)
+        response.json(newPerson)
+
+        console.log('array:', persons)
+        console.log('length', persons.length)
+    }
 })
 
 const PORT = 3001
