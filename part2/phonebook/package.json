@@ -40,5 +40,5 @@
   "devDependencies": {
     "json-server": "^0.17.3"
   },
-  "proxy": "https://fsopen2023-phonebook-backend.onrender.com"
+  "proxy": "http://localhost:3001"
 }
