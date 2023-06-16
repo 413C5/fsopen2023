@@ -106,7 +106,7 @@ const App = () => {
                     resetFields()
                 })
                 .catch(error => {
-                    showMessage(`Error adding contact`, false)
+                    showMessage(error.response.data.error, false)
                 })
         }
     }
