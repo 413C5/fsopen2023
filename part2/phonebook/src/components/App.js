@@ -78,7 +78,7 @@ const App = () => {
                         resetFields()
                     })
                     .catch(error => {
-                        showMessage(`Error updating ${person.name}. That contact was recently deleted`, false)
+                        showMessage(error.response.data.error, false)
                         //console.log(error)
                         //It works now both back and front
                         console.log('.')
