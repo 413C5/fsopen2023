@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Phonebook App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Phonebook is an app that lets users manage their contacts. You can add, update, or delete contacts, and there's a search filter for quick access. Notifications confirm each action. Plus, once a contact is deleted, you can't modify or delete their info.The application stores all contacts in a MongoDB database.
+
+# Try out this app:
+
+You can experience the app by clicking [this link](https://fsopen2023-phonebook-backend.onrender.com).
+
+# Project Details:
+
+This project is part of the [fsopen2023](https://github.com/413C5/fsopen2023/tree/main/part2/phonebook) repository, specifically located in the phonebook directory.It's backend is found on [this repository](https://github.com/413C5/phonebook-backend).
+
+Feel free to explore the [fsopen2023](https://github.com/413C5/fsopen2023) repository to understand its broader context and discover related projects.
+
+
+
+# Getting Started with Create React App
 
 ## Available Scripts
 
