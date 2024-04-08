@@ -9,7 +9,7 @@ Exercises: 2.1-2.5
 
 Project: phonebook
 Folder: phonebook
-Exercises: 2.6-2.17
+Exercises: 2.6-2.17, as well as some related to Part 3
 
 
 Project: countries
